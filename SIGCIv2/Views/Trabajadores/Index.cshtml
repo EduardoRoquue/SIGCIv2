@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Trabajador>
+
+@{
+    ViewData["Title"] = "Directorio de personal";
+}
+
+<h1>Directorio de personal</h1>
+
+<a asp-action="Crear" class="btn btn-primary mb-3">REGISTRAR PERSONAL</a>
+<div class="align-content-md-center">
+
+    <table id="trabajadores" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>EXPEDIENTE</th>
+                <th>NOMBRE</th>
+                <th>CAT STC</th>
+                <th>GERENCIA/SUBGERENCIA</th>
+                <th>COORDINACION</th>
+                <th>GENERO</th>
+                <th>CALIDAD LABORAL</th>
+                <th>TRABAJADOR/ASPIRANTE</th>
+                <th>SECCIONAL</th>
+                <th>DISCAPACIDAD</th>
+                <th>ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var trab in Model)
+                {
+                    <tr>
+                        <td>@trab.IdTrabajador</td>
+                        <td>@trab.Expediente</td>
+                        <td>@trab.Nombre.ToUpper()</td>
+                        <td>@trab.IdCategoria</td>
+                        <td>@trab.Gerencia.ToUpper()</td>
+                        <td>@trab.Coordinacion.ToUpper()</td>
+                        <td>@trab.Genero.ToUpper()</td>
+                        <td>@trab.CalidadLaboral.ToUpper()</td>
+                        <td>@trab.Estado</td>
+                        <td>@trab.Seccional</td>
+                        <td>@trab.Discapacidad</td>
+                        <td>
+                            <a asp-action="Editar" asp-route-id="@trab.Expediente">Editar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </table>
+
+</div>
+@section scripts  {
+
+    <script>
+       
+        $(document).ready(function () {
+            $('#trabajadores').DataTable();
+        });
+
+    </script>
+}

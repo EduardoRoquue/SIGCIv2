@@ -1,0 +1,89 @@
+﻿@model Instructor
+
+@{
+    ViewData["title"] = "Registro de Instructor";
+}
+
+<h1>Registro de instructores</h1>
+
+<div class="card">
+    <form asp-controller="Instructores" asp-action="Crear">
+        <div class="card-body">
+
+            <div class="mb-3">
+                <label asp-for="InstructorExp" class="form-label"></label>
+                <input type="text" asp-for="InstructorExp" maxlength="5" class="form-control" />
+                <span asp-validation-for="InstructorExp" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label"></label>
+                <input type="email" asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Extension" class="form-label"></label>
+                <input type="text" asp-for="Extension" class="form-control" />
+                <span asp-validation-for="Extension" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Horario" class="form-label"></label>
+                <input type="text" asp-for="Horario" class="form-control" />
+                <span asp-validation-for="Horario" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Descanso" class="form-label"></label>
+                <input type="text" asp-for="Descanso" class="form-control" />
+                <span asp-validation-for="Descanso" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Telefono" class="form-label"></label>
+                <input type="text" asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Telefono2" class="form-label"></label>
+                <input type="text" asp-for="Telefono2" class="form-control" />
+                <span asp-validation-for="Telefono2" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Calificacion" class="form-label"></label>
+                <input type="text" asp-for="Calificacion" class="form-control" />
+                <span asp-validation-for="Calificacion" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Gerencia" class="form-label"></label>
+                <input type="text" asp-for="Gerencia" class="form-control" />
+                <span asp-validation-for="Gerencia" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Materias" class="form-label"></label>
+                <input type="text" asp-for="Materias" class="form-control" />
+                <span asp-validation-for="Materias" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Actualizacion" class="form-label"></label>
+                <input type="text" asp-for="Actualizacion" class="form-control" />
+                <span asp-validation-for="Actualizacion" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Calificacion2" class="form-label"></label>
+                <input type="text" asp-for="Calificacion2" class="form-control" />
+                <span asp-validation-for="Calificacion2" class="text-danger"></span>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

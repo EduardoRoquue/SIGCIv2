@@ -1,0 +1,60 @@
+﻿@model CursosInternos
+
+@{
+    ViewData["title"] = "Añadir Curso Interno";
+}
+
+<h1>Registro de un nuevo curso interno</h1>
+
+<form asp-action="Crear" asp-controller="CursosInternos">
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input type="text" asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Clave" class="form-label"></label>
+        <input type="text" asp-for="Clave" class="form-control" />
+        <span asp-validation-for="Clave" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Inicio" class="form-label"></label>
+        <input type="date" asp-for="Inicio" class="form-control" />
+        <span asp-validation-for="Inicio" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Termino" class="form-label"></label>
+        <input type="date" asp-for="Termino" class="form-control" />
+        <span asp-validation-for="Termino" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Tipo" class="form-label"></label>
+        @*<input type="text" asp-for="Tipo" class="form-control" />*@
+        <select name="Tipo" asp-for="Tipo" class="form-control">
+            <option>Seleccione una opcion</option>
+            <option value="Actualizacion">Actualizacion</option>
+            <option value="Desarrollo">Desarrollo</option>
+            <option value="Formacion">Formacion</option>
+            <option value="Induccion">Induccion</option>
+        </select>
+        <span asp-validation-for="Tipo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Dirigido" class="form-label"></label>
+        <input type="text" asp-for="Dirigido" class="form-control" />
+        <span asp-validation-for="Dirigido" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

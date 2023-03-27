@@ -1,0 +1,94 @@
+﻿@model Trabajador
+
+@{
+    ViewData["Title"] = "Editar Trabajador";
+}
+
+<h1>Editar datos del expediente: @Model.Expediente  </h1>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="card">
+    <form asp-controller="Trabajadores" asp-action="Editar">
+        <div class="card-body">
+
+            <input type="hidden"  asp-for="IdTrabajador" />
+
+            @*<div class="mb-3">
+                <label asp-for="Expediente" class="form-label"></label>
+                <input type="text" disabled asp-for="Expediente" maxlength="5" class="form-control" />
+                <span asp-validation-for="Expediente" class="text-danger"></span>
+            </div>*@
+            
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label"></label>
+                <input type="text" asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="IdCategoria" class="form-label"></label>
+                <input type="text" asp-for="IdCategoria" class="form-control" />
+                <span asp-validation-for="IdCategoria" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Gerencia" class="form-label"></label>
+                <input type="text" asp-for="Gerencia" class="form-control" />
+                <span asp-validation-for="Gerencia" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Coordinacion" class="form-label"></label>
+                <input type="text" asp-for="Coordinacion" class="form-control" />
+                <span asp-validation-for="Coordinacion" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Genero" class="form-label"></label>
+                <select name="Genero" asp-for="Genero" class="form-control">
+                    <option>Seleccione una opcion</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CalidadLaboral" class="form-label"></label>
+                <input type="text" asp-for="CalidadLaboral" class="form-control" />
+                <span asp-validation-for="CalidadLaboral" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Estado" class="form-label"></label>
+                <select name="Estado" asp-for="Estado" class="form-control">
+                    <option>Seleccione una opcion</option>
+                    <option value="Trabajador">Trabajador</option>
+                    <option value="Aspirante">Aspirante</option>
+                </select>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Seccional" class="form-label"></label>
+                <input type="text" asp-for="Seccional" class="form-control" />
+                <span asp-validation-for="Seccional" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Discapacidad" class="form-label"></label>
+                <input type="text" asp-for="Discapacidad" class="form-control" />
+                <span asp-validation-for="Discapacidad" class="text-danger"></span>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

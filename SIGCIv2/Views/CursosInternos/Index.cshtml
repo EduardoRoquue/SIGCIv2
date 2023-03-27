@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CursosInternos>
+
+@{
+    ViewData["title"] = "Catalogo de cursos";
+}
+
+<h1>CATALOGO DE CURSOS INTERNOS</h1>
+
+<a asp-action="Crear" class="btn btn-primary mb-3">añadir curso nuevo</a>
+
+<table id="cursosInternos" class="table table-striped">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>NOMBRE DEL CURSO</td>
+            <td>CLAVE</td>
+            <td>INICIO</td>
+            <td>TERMINO</td>
+            <td>TIPO</td>
+            <td>DIRIGIDO</td>
+            <td>ACCIONES</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var inter in Model)
+        {
+            <tr>
+                <td>@inter.IdCursoInterno</td>
+                <td>@inter.Nombre.ToUpper()</td>
+                <td>@inter.Clave.ToUpper()</td>
+                <td>@inter.Inicio.ToString("dd/MM/yyyy")</td>
+                <td>@inter.Termino.ToString("dd/MM/yyyy")</td>
+                <td>@inter.Tipo.ToUpper()</td>
+                <td>@inter.Dirigido.ToUpper()</td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@inter.Clave">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#cursosInternos').DataTable();
+        });
+    </script>
+}
