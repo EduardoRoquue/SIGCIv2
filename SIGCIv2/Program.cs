@@ -19,6 +19,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IRepositorioTrabajadores, RepositorioTrabajadores>();
 builder.Services.AddTransient<IRepositorioInstructores, RepositorioInstructores>();
 builder.Services.AddTransient<IRepositorioCursosInternos, RepositorioCursosInternos>();
+builder.Services.AddTransient<IRepositorioCursosExternos, RepositorioCursosExternos>();
 
 
 var app = builder.Build();

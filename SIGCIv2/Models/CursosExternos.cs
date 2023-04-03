@@ -1,11 +1,16 @@
-﻿namespace SIGCIv2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SIGCIv2.Models
 {
-    public class Externo
+    public class CursosExternos
     {
         public int IdCursoExterno { get; set; }
         public string NombreCurso { get; set; }
-        public DateOnly Inicio { get; set; }
-        public DateOnly Termino { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime Inicio { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Termino { get; set; }
         public string Horas { get; set; }
         public string Dias { get; set; }
         public string Inscritos { get; set; }
@@ -16,5 +21,6 @@
         public string Modalidad { get; set; }
         public string Instructor { get; set; }
         public int Evaluacion { get; set; }
+
     }
 }
