@@ -67,10 +67,10 @@ namespace SIGCIv2.Controllers
         public async Task<ActionResult> Editar(Trabajador trabajador)
         {
             var trabajadorExiste = await repositorioTrabajadores.ObtenerTipo(trabajador.Expediente);
-            //if (trabajadorExiste is null)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            if (trabajadorExiste is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             await repositorioTrabajadores.Actualizar(trabajador);
             return RedirectToAction("Index");
         }
@@ -84,42 +84,5 @@ namespace SIGCIv2.Controllers
             }
             return Json(true);
         }
-
-        [HttpPost]
-        public IActionResult MostrarDatos([FromForm] IFormFile ArchivoExcel)
-        {
-            Stream stream = ArchivoExcel.OpenReadStream();
-            IWorkbook Excel = null;
-            if (Path.GetExtension(ArchivoExcel.FileName) == ".xlsx" ) 
-            {
-                Excel = new XSSFWorkbook(stream);
-            }
-            else
-            {
-                Excel = new XSSFWorkbook(stream);
-            }
-            ISheet HojaExcel = Excel.GetSheetAt(0);
-            int cantidadFila = HojaExcel.LastRowNum;
-            List<Trabajador> lista = new List<Trabajador>();
-            for (int i = 1; i <= cantidadFila; i++)
-            {
-                IRow fila = HojaExcel.GetRow(i);
-                lista.Add(new Trabajador
-                {
-                    Expediente = Convert.ToInt32(fila.GetCell(0)),
-                    Nombre = fila.GetCell(1).ToString(),
-                    IdCategoria = fila.GetCell(2).ToString(),
-                    Gerencia = fila.GetCell(3).ToString(),
-                    Coordinacion = fila.GetCell(4).ToString(),
-                    Genero = fila.GetCell(5).ToString(),
-                    CalidadLaboral = fila.GetCell(6).ToString(),
-                    Estado = fila.GetCell(7).ToString(),
-                    Seccional = fila.GetCell(8).ToString(),
-                });
-            }
-            //return StatusCode(StatusCodes.Status200OK, lista);
-            return View();
-        }
-
     }
 }

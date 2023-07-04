@@ -9,7 +9,7 @@
 <a asp-action="Crear" class="btn btn-primary mb-3">REGISTRAR PERSONAL</a>
 <div class="align-content-md-center">
 
-    <table id="trabajadores" class="table table-striped" style="width:100%">
+    <table id="trabajadores" class="display " style="width:100%">
         <thead>
             <tr>
                 <th>ID</th>
@@ -55,7 +55,12 @@
     <script>
        
         $(document).ready(function () {
-            $('#trabajadores').DataTable();
+            $('#trabajadores').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
         });
 
     </script>

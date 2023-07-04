@@ -4,7 +4,7 @@ using SIGCIv2.Servicios;
 
 namespace SIGCIv2.Controllers
 {
-    public class CursosExternosController: Controller
+    public class CursosExternosController : Controller
     {
         private readonly IRepositorioCursosExternos repositorioCursosExternos;
 
@@ -20,7 +20,7 @@ namespace SIGCIv2.Controllers
             return View(curExternos);
         }
 
-        
+
         public IActionResult Crear()
         {
             return View();
@@ -38,6 +38,32 @@ namespace SIGCIv2.Controllers
             return RedirectToAction("Index");
 
         }
+
+
+        [HttpGet]
+        public async Task<ActionResult> Editar(int id)
+        {
+            var cursosExternos = await repositorioCursosExternos.ObtenerId(id);
+            if (cursosExternos is null)
+            {
+                return RedirectToAction("Privacy", "Home");
+            }
+            return View(cursosExternos);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Editar(CursosExternos cursosExternos)
+        {
+            var cursoExterno = await repositorioCursosExternos.ObtenerId(cursosExternos.IdCursoExterno);
+            //if (trabajadorExiste is null)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            await repositorioCursosExternos.Actualizar(cursosExternos);
+            return RedirectToAction("Index");
+        }
+
+
 
     }
 }

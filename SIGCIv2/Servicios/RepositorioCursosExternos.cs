@@ -6,8 +6,10 @@ namespace SIGCIv2.Servicios
 {
     public interface IRepositorioCursosExternos
     {
+        Task Actualizar(CursosExternos cursosExternos);
         Task Crear(CursosExternos cursosExternos);
         Task<IEnumerable<CursosExternos>> Obtener();
+        Task<CursosExternos> ObtenerId(int IdExterno);
     }
 
     public class RepositorioCursosExternos: IRepositorioCursosExternos
@@ -38,6 +40,26 @@ namespace SIGCIv2.Servicios
                 @"SELECT IdExterno, NOMBRE, INICIO, TERMINO, HORAS, DIAS, INSCRITOS, PROVEEDOR, OBJETIVO, COSTO,
             TIPO, MODALIDAD, INSTRUCTOR, EVALUACION FROM CUR_EXTERNOS;");
         }
+
+        public async Task Actualizar(CursosExternos cursosExternos)
+        {
+            using var connection = new SqlConnection(connectionString); ;
+            await connection.ExecuteAsync($@"UPDATE CUR_EXTERNOS SET
+            NOMBRE = @NombreCurso, INICIO = @Inicio, TERMINO = @Termino, HORAS = @Horas, DIAS = @Dias, INSCRITOS = @Inscritos,
+            PROVEEDOR = @Proveedor, OBJETIVO = @Objetivo, COSTO = @Costo,
+            TIPO = @Tipo, MODALIDAD = @Modalidad, INSTRUCTOR = @Instructor, EVALUACION = @Evaluacion
+            WHERE IdExterno = @IdCursoExterno", cursosExternos);
+        }
+
+        public async Task<CursosExternos> ObtenerId(int IdExterno)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<CursosExternos>
+                (@"SELECT NOMBRE, INICIO, TERMINO, HORAS, DIAS, INSCRITOS, PROVEEDOR, OBJETIVO, COSTO,
+            TIPO, MODALIDAD, INSTRUCTOR, EVALUACION FROM CUR_EXTERNOS WHERE IdExterno = @IdCursoExterno", new { IdExterno });
+        }
+
+
 
     }
 }

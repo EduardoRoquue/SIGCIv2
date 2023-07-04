@@ -1,0 +1,93 @@
+﻿@model CursosExternos
+
+@{
+    ViewData["title"] = "Agregar curso externo";
+}
+
+<h1>Registro de curso externo</h1>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form asp-controller="CursosExternos" asp-action="Editar">
+
+    <div class="mb-3">
+        <label asp-for="NombreCurso" class="form-label"></label>
+        <input type="text" asp-for="NombreCurso" class="form-control" />
+        <span asp-validation-for="NombreCurso" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Inicio" class="form-label"></label>
+        <input type="date" asp-for="Inicio" class="form-control" />
+        <span asp-validation-for="Inicio" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Termino" class="form-label"></label>
+        <input type="date" asp-for="Termino" class="form-control" />
+        <span asp-validation-for="Termino" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Horas" class="form-label"></label>
+        <input type="text" asp-for="Horas" class="form-control" />
+        <span asp-validation-for="Horas" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Dias" class="form-label"></label>
+        <input type="text" asp-for="Dias" class="form-control" />
+        <span asp-validation-for="Dias" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Inscritos" class="form-label"></label>
+        <input type="text" asp-for="Inscritos" class="form-control" />
+        <span asp-validation-for="Inscritos" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Proveedor" class="form-label"></label>
+        <input type="text" asp-for="Proveedor" class="form-control" />
+        <span asp-validation-for="Proveedor" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Objetivo" class="form-label"></label>
+        <input type="text" asp-for="Objetivo" class="form-control" />
+        <span asp-validation-for="Objetivo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Costo" class="form-label"></label>
+        <input type="text" asp-for="Costo" class="form-control" />
+        <span asp-validation-for="Costo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Tipo" class="form-label"></label>
+        <input type="text" asp-for="Tipo" class="form-control" />
+        <span asp-validation-for="Tipo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Modalidad" class="form-label"></label>
+        <input type="text" asp-for="Modalidad" class="form-control" />
+        <span asp-validation-for="Modalidad" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Instructor" class="form-label"></label>
+        <input type="text" asp-for="Instructor" class="form-control" />
+        <span asp-validation-for="Instructor" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Evaluacion" class="form-label"></label>
+        <input type="text" asp-for="Evaluacion" class="form-control" />
+        <span asp-validation-for="Evaluacion" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
