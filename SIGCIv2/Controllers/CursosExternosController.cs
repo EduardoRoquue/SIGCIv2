@@ -54,7 +54,7 @@ namespace SIGCIv2.Controllers
         [HttpPost]
         public async Task<ActionResult> Editar(CursosExternos cursosExternos)
         {
-            var cursoExterno = await repositorioCursosExternos.ObtenerId(cursosExternos.IdCursoExterno);
+            var cursoExterno = await repositorioCursosExternos.ObtenerId(cursosExternos.IdExterno);
             //if (trabajadorExiste is null)
             //{
             //    return RedirectToAction("Index", "Home");

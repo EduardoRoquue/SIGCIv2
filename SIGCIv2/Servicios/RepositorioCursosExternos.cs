@@ -30,7 +30,7 @@ namespace SIGCIv2.Servicios
             VALUES (@NombreCurso, @Inicio, @Termino, @Horas, @Dias, @Inscritos, @Proveedor, @Objetivo, @Costo,
             @Tipo, @Modalidad, @Instructor, @Evaluacion); SELECT SCOPE_IDENTITY();", cursosExternos);
 
-            cursosExternos.IdCursoExterno = id;
+            cursosExternos.IdExterno = id;
         }
 
         public async Task<IEnumerable<CursosExternos>> Obtener()

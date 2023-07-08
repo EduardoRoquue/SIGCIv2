@@ -7,57 +7,104 @@
 <h1>Catalogo de instructores</h1>
 
 <a asp-action="Crear" class="btn btn-primary mb-3">Añadir instructor</a>
-
-<table id="instructores" class="table table-striped" style="width:100%">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>EXPEDIENTE</th>
-            <th>NOMBRE</th>
-            <th>CORREO</th>
-            <th>EXT</th>
-            <th>HORARIO</th>
-            <th>DESCANSO</th>
-            <th>TELEFONO 1</th>
-            <th>TEELFONO 2</th>
-            <th>CALIFICACION</th>
-            <th>GERENCIA</th>
-            <th>MATERIAS</th>
-            <th>ACTUALIZACION</th>
-            <th>CALIFICACION FINAL</th>
-            <th>ACCIONES</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="table-responsive">
+    <table id="instructores" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>EXPEDIENTE</th>
+                <th>NOMBRE</th>
+                <th>CORREO</th>
+                <th>EXT</th>
+                <th>HORARIO</th>
+                <th>DESCANSO</th>
+                <th>TELEFONO 1</th>
+                <th>TEELFONO 2</th>
+                <th>CALIFICACION</th>
+                <th>GERENCIA</th>
+                <th>MATERIAS</th>
+                <th>ACTUALIZACION</th>
+                <th>CALIFICACION FINAL</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
         @foreach (var inst in Model)
         {
-            <tr>
-                <td>@inst.IdInstructor</td>
-                <td>@inst.InstructorExp</td>
-                <td>@inst.Nombre</td>
-                <td><a href="mailto:@inst.Correo">@inst.Correo</a></td>
-                <td>@inst.Extension</td>
-                <td>@inst.Horario</td>
-                <td>@inst.Descanso</td>
-                <td>@inst.Telefono</td>
-                <td>@inst.Telefono2</td>
-                <td>@inst.Calificacion</td>
-                <td>@inst.Gerencia</td>
-                <td>@inst.Materias</td>
-                <td>@inst.Actualizacion</td>
-                <td>@inst.Calificacion2</td>
-                <td>
-
-                </td>
-            </tr>
+                <tr>
+                    <td>@inst.IdInstructor</td>
+                    <td>@inst.Expediente</td>
+                    <td>@inst.Nombre</td>
+                    <td><a href="mailto:@inst.Correo">@inst.Correo</a></td>
+                    <td>@inst.Extension</td>
+                    <td>@inst.Horario</td>
+                    <td>@inst.Descanso</td>
+                    <td>@inst.Tel1</td>
+                    <td>@inst.Tel2</td>
+                    <td>@inst.CALIF</td>
+                    <td>@inst.Gerencia</td>
+                    <td>@inst.Materias</td>
+                    <td>@inst.Actualizacion</td>
+                    <td>@inst.Calificacion2</td>
+                    <td>
+                    </td>
+                </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+</div>
+
 
 @section scripts {
     <script>
         $(document).ready(function (){
-            $('#instructores').DataTable();
+            $('#instructores').DataTable({
+                responsive: true,
+                dom: 'Bfrtip',
+                pageLength: 15,
+                language: {
+                    searchPlaceholder: "Busqueda de campos",
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            modifier: {
+                                // DataTables core
+                                order: 'index', // 'current', 'applied',
+                                //'index', 'original'
+                                page: 'all', // 'all', 'current'
+                                search: 'none' // 'none', 'applied', 'removed'
+
+                            }
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5'
+                    },
+
+                    {
+                        extend: 'csvHtml5'
+                    }
+
+                ],
+
+                initComplete: function () {
+                    var btns = $('.buttons-excel');
+                    btns.addClass('btn btn-success btn-small btn-outline-green green-text ml-1');
+                    btns.removeClass('dt-button');
+
+                    var btns2 = $('.buttons-pdf');
+                    btns2.addClass('btn btn-danger btn-small btn-outline-red red-text ml-1');
+                    btns2.removeClass('dt-button');
+
+                    var btns3 = $('.buttons-csv');
+                    btns3.addClass('btn btn-warning btn-small btn-outline-yellow white-text ml-1');
+                    btns3.removeClass('dt-button');
+                }
+            });
         });
     </script>
 }

@@ -7,44 +7,92 @@
 <h1>CATALOGO DE CURSOS INTERNOS</h1>
 
 <a asp-action="Crear" class="btn btn-primary mb-3">añadir curso nuevo</a>
-
-<table id="cursosInternos" class="table table-striped">
-    <thead>
-        <tr>
-            <td>ID</td>
-            <td>NOMBRE DEL CURSO</td>
-            <td>CLAVE</td>
-            <td>INICIO</td>
-            <td>TERMINO</td>
-            <td>TIPO</td>
-            <td>DIRIGIDO</td>
-            <td>ACCIONES</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var inter in Model)
-        {
+<div class="table-responsive">
+    <table id="cursosInternos" style="width:100%">
+        <thead>
             <tr>
-                <td>@inter.IdCursoInterno</td>
-                <td>@inter.Nombre.ToUpper()</td>
-                <td>@inter.Clave.ToUpper()</td>
-                <td>@inter.Inicio.ToString("dd/MM/yyyy")</td>
-                <td>@inter.Termino.ToString("dd/MM/yyyy")</td>
-                <td>@inter.Tipo.ToUpper()</td>
-                <td>@inter.Dirigido.ToUpper()</td>
-                <td>
-                    <a asp-action="Editar" asp-route-id="@inter.Clave">Editar</a>
-                </td>
+                <td>ID</td>
+                <td>NOMBRE DEL CURSO</td>
+                <td>CLAVE</td>
+                <td>INICIO</td>
+                <td>TERMINO</td>
+                <td>TIPO</td>
+                <td>DIRIGIDO</td>
+                <td>ACCIONES</td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var inter in Model)
+            {
+                <tr>
+                    <td>@inter.IdInterno.ToString()</td>
+                    <td>@inter.Nombre.ToUpper()</td>
+                    <td>@inter.Clave.ToUpper()</td>
+                    <td>@inter.Inicio.ToString("dd/MM/yyyy")</td>
+                    <td>@inter.Termino.ToString("dd/MM/yyyy")</td>
+                    <td>@inter.Tipo.ToUpper()</td>
+                    <td>@inter.Dirigido.ToUpper()</td>
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@inter.Clave">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
 
 
 @section scripts {
     <script>
         $(document).ready(function () {
-            $('#cursosInternos').DataTable();
+            $('#cursosInternos').DataTable({
+                responsive: true,
+                dom: 'Bfrtip',
+                pageLength: 15,
+                language: {
+                    searchPlaceholder: "Busqueda de campos",
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            modifier: {
+                                // DataTables core
+                                order: 'index', // 'current', 'applied',
+                                //'index', 'original'
+                                page: 'all', // 'all', 'current'
+                                search: 'none' // 'none', 'applied', 'removed'
+
+                            }
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5'
+                    },
+
+                    {
+                        extend: 'csvHtml5'
+                    }
+
+                ],
+
+                initComplete: function () {
+                    var btns = $('.buttons-excel');
+                    btns.addClass('btn btn-success btn-small btn-outline-green green-text ml-1');
+                    btns.removeClass('dt-button');
+
+                    var btns2 = $('.buttons-pdf');
+                    btns2.addClass('btn btn-danger btn-small btn-outline-red red-text ml-1');
+                    btns2.removeClass('dt-button');
+
+                    var btns3 = $('.buttons-csv');
+                    btns3.addClass('btn btn-warning btn-small btn-outline-yellow white-text ml-1');
+                    btns3.removeClass('dt-button');
+                }
+            });
         });
     </script>
 }

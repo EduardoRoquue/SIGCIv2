@@ -14,6 +14,8 @@
 
             <input type="hidden"  asp-for="IdTrabajador" />
 
+            <input type="hidden" asp-for="Expediente"/>
+
             @*<div class="mb-3">
                 <label asp-for="Expediente" class="form-label"></label>
                 <input type="text" disabled asp-for="Expediente" maxlength="5" class="form-control" />
@@ -27,9 +29,9 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="IdCategoria" class="form-label"></label>
-                <input type="text" asp-for="IdCategoria" class="form-control" />
-                <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                <label asp-for="CATSTC" class="form-label"></label>
+                <input type="text" asp-for="CATSTC" class="form-control" />
+                <span asp-validation-for="CATSTC" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
@@ -62,13 +64,13 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="Estado" class="form-label"></label>
-                <select name="Estado" asp-for="Estado" class="form-control">
+                <label asp-for="Estatus" class="form-label"></label>
+                <select name="Estatus" asp-for="Estatus" class="form-control">
                     <option>Seleccione una opcion</option>
                     <option value="Trabajador">Trabajador</option>
                     <option value="Aspirante">Aspirante</option>
                 </select>
-                <span asp-validation-for="Estado" class="text-danger"></span>
+                <span asp-validation-for="Estatus" class="text-danger"></span>
             </div>
 
             <div class="mb-3">

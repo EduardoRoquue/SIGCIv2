@@ -35,12 +35,12 @@ namespace SIGCIv2.Controllers
             }
 
             //Validaciones en el Repositorio
-            var noExisteExpediente = await repositorioInstructores.NoExiste(instructor.InstructorExp);
+            var noExisteExpediente = await repositorioInstructores.NoExiste(instructor.Expediente);
 
             if (noExisteExpediente)
             {
-                ModelState.AddModelError(nameof(instructor.InstructorExp),
-                    $"El expediente {instructor.InstructorExp} no existe");
+                ModelState.AddModelError(nameof(instructor.Expediente),
+                    $"El expediente {instructor.Expediente} no existe");
                 return View(instructor);
             }
 

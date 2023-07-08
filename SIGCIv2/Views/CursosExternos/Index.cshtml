@@ -7,57 +7,104 @@
 <h1>Unidad de Planeación y Cursos Externos</h1>
 
 <a asp-action="Crear" class="btn btn-primary mb-3">Crear nuevo</a>
-
-<table id="Externos" class="table table-striped" style="width:100%">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>NOMBRE</th>
-            <th>INICIO</th>
-            <th>TERMINO</th>
-            <th>HORAS</th>
-            <th>DIAS
-            <th>INSCRITOS</th>
-            <th>PROVEEDOR</th>
-            <th>OBJETIVO</th>
-            <th>COSTO</th>
-            <th>TIPO</th>
-            <th>MODALIDAD</th>
-            <th>INSTRUCTOR</th>
-            <th>EVALUACION</th>
-            <th>ACCIONES</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var externo in Model)
-        {           
+<div class="table-responsive">
+    <table id="Externos" style="width:100%">
+        <thead>
             <tr>
-                <td>@externo.IdCursoExterno</td>
-                <td>@externo.NombreCurso</td>
-                <td>@externo.Inicio.ToString("dd/MM/yyyy")</td>
-                <td>@externo.Termino.ToString("dd/MM/yyyy")</td>
-                <td>@externo.Horas</td>
-                <td>@externo.Dias</td>
-                <td>@externo.Inscritos</td>
-                <td>@externo.Proveedor.ToUpper()</td>
-                <td>@externo.Objetivo.ToUpper()</td>
-                <td>@externo.Costo</td>
-                <td>@externo.Tipo.ToUpper()</td>
-                <td>@externo.Modalidad.ToUpper()</td>
-                <td>@externo.Instructor.ToUpper()</td>
-                <td>@externo.Evaluacion</td>
-                <td>
-                    <a asp-action="Editar" asp-route-id="@externo.IdCursoExterno">Editar</a>
-                </td>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>INICIO</th>
+                <th>TERMINO</th>
+                <th>HORAS</th>
+                <th>DIAS
+                <th>INSCRITOS</th>
+                <th>PROVEEDOR</th>
+                <th>OBJETIVO</th>
+                <th>COSTO</th>
+                <th>TIPO</th>
+                <th>MODALIDAD</th>
+                <th>INSTRUCTOR</th>
+                <th>EVALUACION</th>
+                <th>ACCIONES</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var externo in Model)
+            {
+                <tr>
+                    <td>@externo.IdExterno</td>
+                    <td>@externo.Nombre</td>
+                    <td>@externo.Inicio.ToString("dd/MM/yyyy")</td>
+                    <td>@externo.Termino.ToString("dd/MM/yyyy")</td>
+                    <td>@externo.Horas</td>
+                    <td>@externo.Dias</td>
+                    <td>@externo.Inscritos</td>
+                    <td>@externo.Proveedor.ToUpper()</td>
+                    <td>@externo.Objetivo.ToUpper()</td>
+                    <td>@externo.Costo</td>
+                    <td>@externo.Tipo.ToUpper()</td>
+                    <td>@externo.Modalidad.ToUpper()</td>
+                    <td>@externo.Instructor.ToUpper()</td>
+                    <td>@externo.Evaluacion</td>
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@externo.IdExterno">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 
 @section scripts {
     <script>
         $(document).ready(function () {
-            $('#Externos').DataTable();
+            $('#Externos').DataTable({
+                responsive: true,
+                dom: 'Bfrtip',
+                pageLength: 15,
+                language: {
+                    searchPlaceholder: "Busqueda de campos",
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                },
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            modifier: {
+                                // DataTables core
+                                order: 'index', // 'current', 'applied',
+                                //'index', 'original'
+                                page: 'all', // 'all', 'current'
+                                search: 'none' // 'none', 'applied', 'removed'
+
+                            }
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5'
+                    },
+
+                    {
+                        extend: 'csvHtml5'
+                    }
+
+                ],
+
+                initComplete: function () {
+                    var btns = $('.buttons-excel');
+                    btns.addClass('btn btn-success btn-small btn-outline-green green-text ml-1');
+                    btns.removeClass('dt-button');
+
+                    var btns2 = $('.buttons-pdf');
+                    btns2.addClass('btn btn-danger btn-small btn-outline-red red-text ml-1');
+                    btns2.removeClass('dt-button');
+
+                    var btns3 = $('.buttons-csv');
+                    btns3.addClass('btn btn-warning btn-small btn-outline-yellow white-text ml-1');
+                    btns3.removeClass('dt-button');
+                }
+            });
         });
     </script>
 }

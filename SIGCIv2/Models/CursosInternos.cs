@@ -4,7 +4,7 @@ namespace SIGCIv2.Models
 {
     public class CursosInternos
     {
-        public int IdCursoInterno { get; set; }
+        public int IdInterno { get; set; }
 
         public string Nombre { get; set; }
         public string Clave { get; set; }

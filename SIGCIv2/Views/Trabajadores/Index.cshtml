@@ -7,9 +7,9 @@
 <h1>Directorio de personal</h1>
 
 <a asp-action="Crear" class="btn btn-primary mb-3">REGISTRAR PERSONAL</a>
-<div class="align-content-md-center">
+<div class="table-responsive">
 
-    <table id="trabajadores" class="display " style="width:100%">
+    <table id="trabajadores" style="width:100%">
         <thead>
             <tr>
                 <th>ID</th>
@@ -33,12 +33,12 @@
                         <td>@trab.IdTrabajador</td>
                         <td>@trab.Expediente</td>
                         <td>@trab.Nombre.ToUpper()</td>
-                        <td>@trab.IdCategoria</td>
+                        <td>@trab.CATSTC</td>
                         <td>@trab.Gerencia.ToUpper()</td>
                         <td>@trab.Coordinacion.ToUpper()</td>
                         <td>@trab.Genero.ToUpper()</td>
                         <td>@trab.CalidadLaboral.ToUpper()</td>
-                        <td>@trab.Estado</td>
+                        <td>@trab.Estatus</td>
                         <td>@trab.Seccional</td>
                         <td>@trab.Discapacidad</td>
                         <td>
@@ -56,10 +56,57 @@
        
         $(document).ready(function () {
             $('#trabajadores').DataTable({
-                dom: 'Bfrtip',
+                responsive: true,
+                dom: 'Bfrtip', 
+                pageLength: 15,
+                language: {
+                    searchPlaceholder: "Busqueda de campos",
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+                },
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            modifier: {
+                                // DataTables core
+                                order: 'index', // 'current', 'applied',
+                                //'index', 'original'
+                                page: 'all', // 'all', 'current'
+                                search: 'none' // 'none', 'applied', 'removed'
+
+                            },
+                            columns: [1, 2, 3, 4, 5, 6]
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5, 6]
+                        }
+                    },
+
+                    {
+                        extend: 'csvHtml5',
+                        exportOptions: {
+                            columns: [1, 2, 3, 4, 5, 6]
+                        }
+                    }
+
+                ],
+
+                initComplete: function () {
+                    var btns = $('.buttons-excel');
+                    btns.addClass('btn btn-success btn-small btn-outline-green green-text ml-1');
+                    btns.removeClass('dt-button');
+
+                    var btns2 = $('.buttons-pdf');
+                    btns2.addClass('btn btn-danger btn-small btn-outline-red red-text ml-1');
+                    btns2.removeClass('dt-button');
+
+                    var btns3 = $('.buttons-csv');
+                    btns3.addClass('btn btn-warning btn-small btn-outline-yellow white-text ml-1');
+                    btns3.removeClass('dt-button');
+                }
             });
         });
 

@@ -26,7 +26,7 @@ namespace SIGCIv2.Servicios
             using var connection = new SqlConnection(connectionString);
             var id = await connection.QuerySingleAsync<int>($@"
             INSERT INTO TRABAJADORES (EXPEDIENTE, NOMBRE, CATSTC,GERENCIA, COORDINACION, GENERO, CalidadLaboral, ESTATUS, SECCIONAL, DISCAPACIDAD)
-            VALUES (@Expediente, @Nombre, @IdCategoria, @Gerencia, @Coordinacion, @Genero, @CalidadLaboral, @Estado, @Seccional, @Discapacidad);
+            VALUES (@Expediente, @Nombre, @CATSTC, @Gerencia, @Coordinacion, @Genero, @CalidadLaboral, @Estatus, @Seccional, @Discapacidad);
             SELECT SCOPE_IDENTITY();", trabajador);
             trabajador.IdTrabajador = id;
         }
@@ -43,16 +43,16 @@ namespace SIGCIv2.Servicios
         {
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryAsync<Trabajador>(
-                @"SELECT IdTrabajador, EXPEDIENTE, NOMBRE, CATSTC, GERENCIA, COORDINACION, GENERO, CalidadLaboral, ESTATUS, SECCIONAL, DISCAPACIDAD FROM TRABAJADORES;");
-                //@"sp_CatalogoTrabajadores",
-                //commandType: System.Data.CommandType.StoredProcedure);
+                //@"SELECT IdTrabajador, EXPEDIENTE, NOMBRE, CATSTC, GERENCIA, COORDINACION, GENERO, CalidadLaboral, ESTATUS, SECCIONAL, DISCAPACIDAD FROM TRABAJADORES;");
+                @"sp_CatalogoTrabajadores",
+                commandType: System.Data.CommandType.StoredProcedure);
         }
 
         public async Task Actualizar(Trabajador trabajador)
         {
             using var connection = new SqlConnection(connectionString); ;
             await connection.ExecuteAsync($@"UPDATE TRABAJADORES SET
-            NOMBRE = @Nombre, CATSTC = @IdCategoria, GERENCIA = @Gerencia, COORDINACION = @Coordinacion, GENERO = @Genero, CalidadLaboral = @CalidadLaboral, ESTATUS = @Estado, SECCIONAL = @Seccional, DISCAPACIDAD = @Discapacidad
+            NOMBRE = @Nombre, CATSTC = @CATSTC, GERENCIA = @Gerencia, COORDINACION = @Coordinacion, GENERO = @Genero, CalidadLaboral = @CalidadLaboral, ESTATUS = @Estatus, SECCIONAL = @Seccional, DISCAPACIDAD = @Discapacidad
             WHERE EXPEDIENTE = @Expediente", trabajador);
         }
 

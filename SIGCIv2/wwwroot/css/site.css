@@ -1,18 +1,39 @@
-html {
+/*html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+@media screen and (min-width: 80rem) {
+    .container {
+        margin: 1em 2em;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+  position: absolute;
+  max-width: 100%;
+  height: auto;
 }
 
 body {
   margin-bottom: 60px;
+}*/
+
+.table-buttons {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }

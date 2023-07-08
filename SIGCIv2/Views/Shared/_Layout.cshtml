@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewData["Title"] - SIGCIv2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -29,9 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="CursosInternos" asp-action="Index">Cursos Internos</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="CursosEstandar" asp-action="Index">Certificaciones</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Instructores" asp-action="Index">Instructores</a>
                         </li>
@@ -62,9 +62,10 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="card-footer">
         <div class="container">
-            &copy; 2023 - SIGCIv2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <center>&copy; 2023 - SIGCIv2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></center>
+            
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -15,13 +15,14 @@ namespace SIGCIv2.Models
 
         [Required(ErrorMessage ="El {0} es requerido")]
         [Display(Name ="Nombre del trabajador")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage ="Solo letras")]
+        //[RegularExpression(@"^[\p{L}\s]+$", ErrorMessage ="Solo letras")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "Solo letras")]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage ="La {0} es requerida")]
         [Display(Name ="Categoria STC")]
         //[RegularExpression(@"")]
-        public string IdCategoria { get; set; }
+        public string CATSTC { get; set; }
 
         [Required(ErrorMessage = "La {0} es requerida")]
         [Display(Name = "Gerencia/Subgerencia")]
@@ -45,7 +46,7 @@ namespace SIGCIv2.Models
 
         [Required(ErrorMessage = "El {0} es requerido")]
         [Display(Name = "Trabajador/Aspirante")]
-        public string Estado { get; set; }
+        public string Estatus { get; set; }
 
         [Required(ErrorMessage = "La {0} es requerida")]
         [Display(Name = "Seccional")]

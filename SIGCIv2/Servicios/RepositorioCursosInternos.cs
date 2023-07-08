@@ -27,7 +27,7 @@ namespace SIGCIv2.Servicios
                 $@"INSERT INTO CUR_INTERNOS (NOMBRE, CLAVE, INICIO, TERMINO, TIPO, DIRIGIDO)
                 VALUES (@Nombre, @Clave, @Inicio, @Termino, @Tipo, @Dirigido);
                 SELECT SCOPE_IDENTITY();", cursosInternos);
-            cursosInternos.IdCursoInterno = id;
+            cursosInternos.IdInterno = id;
         }
 
         public async Task<bool> Existe(string Clave)
@@ -45,7 +45,5 @@ namespace SIGCIv2.Servicios
                 @"SELECT IdInterno, NOMBRE, CLAVE, INICIO, TERMINO, TIPO, DIRIGIDO
                     FROM CUR_INTERNOS");
         }
-
-
     }
 }

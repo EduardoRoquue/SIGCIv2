@@ -4,8 +4,8 @@ namespace SIGCIv2.Models
 {
     public class CursosExternos
     {
-        public int IdCursoExterno { get; set; }
-        public string NombreCurso { get; set; }
+        public int IdExterno { get; set; }
+        public string Nombre { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime Inicio { get; set; }
