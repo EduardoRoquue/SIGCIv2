@@ -42,7 +42,8 @@
                         <td>@trab.Seccional</td>
                         <td>@trab.Discapacidad</td>
                         <td>
-                            <a asp-action="Editar" asp-route-id="@trab.Expediente">Editar</a>
+                        <button type="submit" class="btn btn-info">Editar</button>
+                        <button type="submit" class="btn btn-danger">Borrar</button>
                         </td>
                     </tr>
                 }
@@ -75,20 +76,20 @@
                                 search: 'none' // 'none', 'applied', 'removed'
 
                             },
-                            columns: [1, 2, 3, 4, 5, 6]
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         }
                     },
                     {
                         extend: 'pdfHtml5',
                         exportOptions: {
-                            columns: [1, 2, 3, 4, 5, 6]
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         }
                     },
 
                     {
                         extend: 'csvHtml5',
                         exportOptions: {
-                            columns: [1, 2, 3, 4, 5, 6]
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         }
                     }
 

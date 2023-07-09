@@ -3,7 +3,8 @@
     public class Instructor
     {
         public int IdInstructor { get; set; }
-        public int Expediente { get; set; }
+
+        public int TrabajadorExp { get; set; }
         public string Nombre { get; set; }
         public string Correo { get; set; }
         public string Extension { get; set; }

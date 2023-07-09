@@ -8,7 +8,7 @@ namespace SIGCIv2.Models
         public int IdTrabajador { get; set; }
 
         [Required(ErrorMessage ="El {0} es requerido")]
-        [Display(Name ="Expediente del trabajador")]
+        [Display(Name ="InstructorExp del trabajador")]
         [RegularExpression(@"[0-9]+",ErrorMessage ="Ingrese solo numeros")]
         [Remote(action:"VerificarExpediente", controller:"Trabajadores")]
         public int Expediente { get; set; }

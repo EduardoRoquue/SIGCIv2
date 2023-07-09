@@ -8,6 +8,7 @@ namespace SIGCIv2.Servicios
     public interface IRepositorioTrabajadores
     {
         Task Actualizar(Trabajador trabajador);
+        Task Borrar(Trabajador trabajador);
         Task Crear(Trabajador trabajador);
         Task<bool> Existe(int Expediente);
         Task<IEnumerable<Trabajador>> Obtener();
@@ -38,7 +39,7 @@ namespace SIGCIv2.Servicios
             new { Expediente });
             return existe == 1;
         }
-
+        
         public async Task<IEnumerable<Trabajador>> Obtener()
         {
             using var connection = new SqlConnection(connectionString);
@@ -54,6 +55,13 @@ namespace SIGCIv2.Servicios
             await connection.ExecuteAsync($@"UPDATE TRABAJADORES SET
             NOMBRE = @Nombre, CATSTC = @CATSTC, GERENCIA = @Gerencia, COORDINACION = @Coordinacion, GENERO = @Genero, CalidadLaboral = @CalidadLaboral, ESTATUS = @Estatus, SECCIONAL = @Seccional, DISCAPACIDAD = @Discapacidad
             WHERE EXPEDIENTE = @Expediente", trabajador);
+        }
+
+        public async Task Borrar(Trabajador trabajador)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync($@"DELETE FROM INSTRUCTORES WHERE TrabajadorExp = @Expediente;
+            DELETE FROM TRABAJADORES WHERE EXPEDIENTE = @Expediente;", trabajador);
         }
 
         public async Task<Trabajador> ObtenerTipo(int Expediente)
