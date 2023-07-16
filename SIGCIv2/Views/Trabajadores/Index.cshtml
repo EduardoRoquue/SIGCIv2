@@ -42,7 +42,8 @@
                         <td>@trab.Seccional</td>
                         <td>@trab.Discapacidad</td>
                         <td>
-                            <a asp-action="Editar" asp-route-id="@trab.Expediente">Editar</a>
+                        <a asp-action="Editar" class="btn btn-secondary" asp-route-id="@trab.Expediente">Editar</a>
+                        <a asp-action="Borrar" class="btn btn-danger" asp-route-id="@trab.Expediente">Borrar</a>
                         </td>
                     </tr>
                 }
@@ -58,7 +59,7 @@
             $('#trabajadores').DataTable({
                 responsive: true,
                 dom: 'Bfrtip', 
-                pageLength: 15,
+                pageLength: 10,
                 language: {
                     searchPlaceholder: "Busqueda de campos",
                     "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"

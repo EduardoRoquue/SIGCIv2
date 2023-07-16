@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using NPOI.OpenXmlFormats.Shared;
 using SIGCIv2.Models;
 
 namespace SIGCIv2.Servicios
@@ -8,6 +9,7 @@ namespace SIGCIv2.Servicios
     public interface IRepositorioTrabajadores
     {
         Task Actualizar(Trabajador trabajador);
+        Task Borrar(Trabajador trabajador);
         Task Crear(Trabajador trabajador);
         Task<bool> Existe(int Expediente);
         Task<IEnumerable<Trabajador>> Obtener();
@@ -50,10 +52,17 @@ namespace SIGCIv2.Servicios
 
         public async Task Actualizar(Trabajador trabajador)
         {
-            using var connection = new SqlConnection(connectionString); ;
+            using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync($@"UPDATE TRABAJADORES SET
             NOMBRE = @Nombre, CATSTC = @CATSTC, GERENCIA = @Gerencia, COORDINACION = @Coordinacion, GENERO = @Genero, CalidadLaboral = @CalidadLaboral, ESTATUS = @Estatus, SECCIONAL = @Seccional, DISCAPACIDAD = @Discapacidad
             WHERE EXPEDIENTE = @Expediente", trabajador);
+        }
+
+        public async Task Borrar(Trabajador trabajador)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"DELETE FROM INSTRUCTORES WHERE TrabajadorExp = @Expediente;
+            DELETE FROM TRABAJADORES WHERE EXPEDIENTE = @Expediente", trabajador);
         }
 
         public async Task<Trabajador> ObtenerTipo(int Expediente)
@@ -63,8 +72,5 @@ namespace SIGCIv2.Servicios
                  @"SELECT EXPEDIENTE, NOMBRE, CATSTC,GERENCIA, COORDINACION, GENERO, CalidadLaboral, ESTATUS, SECCIONAL, DISCAPACIDAD
                 FROM TRABAJADORES WHERE EXPEDIENTE = @Expediente", new { Expediente });
         }
-
     }
-
-
 }

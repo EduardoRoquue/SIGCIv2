@@ -75,6 +75,29 @@ namespace SIGCIv2.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<ActionResult> Borrar(int id)
+        {
+            var trabajador = await repositorioTrabajadores.ObtenerTipo(id);
+            if (trabajador is null)
+            {
+                return RedirectToAction("Privacy", "Home");
+            }
+            return View(trabajador);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Borrar(Trabajador trabajador)
+        {
+            var trabajadorExiste = await repositorioTrabajadores.ObtenerTipo(trabajador.Expediente);
+            if (trabajadorExiste is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            await repositorioTrabajadores.Borrar(trabajador);
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> VerificarExpediente(int expediente, string nombre)
         {
             var yaExisteExpediente = await repositorioTrabajadores.Existe(expediente);

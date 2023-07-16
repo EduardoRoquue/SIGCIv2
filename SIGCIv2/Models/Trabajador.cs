@@ -9,7 +9,7 @@ namespace SIGCIv2.Models
 
         [Required(ErrorMessage ="El {0} es requerido")]
         [Display(Name ="Expediente del trabajador")]
-        [RegularExpression(@"[0-9]+",ErrorMessage ="Ingrese solo numeros")]
+        [RegularExpression(@"[0-9]{1,5}",ErrorMessage ="Ingrese solo numeros y un máximo de 5 caractéres")]
         [Remote(action:"VerificarExpediente", controller:"Trabajadores")]
         public int Expediente { get; set; }
 
