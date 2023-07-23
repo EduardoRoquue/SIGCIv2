@@ -1,84 +1,93 @@
 ﻿@model Instructor
 
 @{
-    ViewData["title"] = "Registro de Instructor";
+    ViewData["title"] = "Bprrado de Instructor";
 }
 
-<h1>Registro de instructores</h1>
+<h1>Borrado de instructores</h1>
 
 <div class="card">
-    <form asp-controller="Instructores" asp-action="Crear">
+    <form asp-controller="Instructores" asp-action="Borrar">
         <div class="card-body">
+
+            <input type="hidden" asp-for="IdInstructor" maxlength="5" class="form-control" />
+            <input type="hidden" asp-for="Expediente" maxlength="5" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label"></label>
+                <input type="text" disabled asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
 
             <div class="mb-3">
                 <label asp-for="Expediente" class="form-label"></label>
-                <input type="text" asp-for="Expediente" maxlength="5" class="form-control" />
+                <input type="text" disabled asp-for="Expediente" maxlength="5" class="form-control" />
                 <span asp-validation-for="Expediente" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Correo" class="form-label"></label>
-                <input type="email" asp-for="Correo" class="form-control" />
+                <input type="email" disabled asp-for="Correo" class="form-control" />
                 <span asp-validation-for="Correo" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Extension" class="form-label"></label>
-                <input type="text" asp-for="Extension" class="form-control" />
+                <input type="text" disabled asp-for="Extension" class="form-control" />
                 <span asp-validation-for="Extension" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Horario" class="form-label"></label>
-                <input type="text" asp-for="Horario" class="form-control" />
+                <input type="text" disabled asp-for="Horario" class="form-control" />
                 <span asp-validation-for="Horario" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Descanso" class="form-label"></label>
-                <input type="text" asp-for="Descanso" class="form-control" />
+                <input type="text" disabled asp-for="Descanso" class="form-control" />
                 <span asp-validation-for="Descanso" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Tel1" class="form-label"></label>
-                <input type="text" asp-for="Tel1" class="form-control" />
+                <input type="text" disabled asp-for="Tel1" class="form-control" />
                 <span asp-validation-for="Tel1" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Tel2" class="form-label"></label>
-                <input type="text" asp-for="Tel2" class="form-control" />
+                <input type="text" disabled asp-for="Tel2" class="form-control" />
                 <span asp-validation-for="Tel2" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="CALIF" class="form-label"></label>
-                <input type="text" asp-for="CALIF" class="form-control" />
+                <input type="text" disabled asp-for="CALIF" class="form-control" />
                 <span asp-validation-for="CALIF" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Gerencia" class="form-label"></label>
-                <input type="text" asp-for="Gerencia" class="form-control" />
+                <input type="text" disabled asp-for="Gerencia" class="form-control" />
                 <span asp-validation-for="Gerencia" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Materias" class="form-label"></label>
-                <input type="text" asp-for="Materias" class="form-control" />
+                <input type="text" disabled asp-for="Materias" class="form-control" />
                 <span asp-validation-for="Materias" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Actualizacion" class="form-label"></label>
-                <input type="text" asp-for="Actualizacion" class="form-control" />
+                <input type="text" disabled asp-for="Actualizacion" class="form-control" />
                 <span asp-validation-for="Actualizacion" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="Calif2" class="form-label"></label>
-                <input type="text" asp-for="Calif2" class="form-control" />
+                <input type="text" disabled asp-for="Calif2" class="form-control" />
                 <span asp-validation-for="Calif2" class="text-danger"></span>
             </div>
 

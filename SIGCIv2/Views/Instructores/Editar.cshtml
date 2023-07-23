@@ -1,19 +1,24 @@
 ﻿@model Instructor
 
 @{
-    ViewData["title"] = "Registro de Instructor";
+    ViewData["title"] = "Actualización de datos del Instructor";
 }
 
-<h1>Registro de instructores</h1>
+<h1>Editar datos del expediente: @Model.Expediente  </h1>
+
+<h1>Actualizacón de datos de instructores</h1>
 
 <div class="card">
-    <form asp-controller="Instructores" asp-action="Crear">
+    <form asp-controller="Instructores" asp-action="Editar">
         <div class="card-body">
+            
+            <input type="hidden"  asp-for="IdInstructor" maxlength="5" class="form-control" />
+            <input type="hidden"  asp-for="Expediente" maxlength="5" class="form-control" />
 
             <div class="mb-3">
-                <label asp-for="Expediente" class="form-label"></label>
-                <input type="text" asp-for="Expediente" maxlength="5" class="form-control" />
-                <span asp-validation-for="Expediente" class="text-danger"></span>
+                <label asp-for="Nombre" class="form-label"></label>
+                <input type="text" disabled asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
@@ -83,7 +88,12 @@
             </div>
 
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary">Editar</button>
         <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -18,13 +18,13 @@
                 <th>EXT</th>
                 <th>HORARIO</th>
                 <th>DESCANSO</th>
-                <th>TELEFONO 1</th>
-                <th>TEELFONO 2</th>
+                <th>TELEFONO LOCAL</th>
+                <th>TEELFONO CELULAR</th>
                 <th>CALIFICACION</th>
-                <th>GERENCIA</th>
-                <th>MATERIAS</th>
+                <th>GERENCIA/UNIDAD/TALLER/LINEA</th>
+                <th>MATERIAS A IMPARTIR</th>
                 <th>ACTUALIZACION</th>
-                <th>CALIFICACION FINAL</th>
+                <th>CALIF (ACT)</th>
                 <th>ACCIONES</th>
             </tr>
         </thead>
@@ -45,14 +45,15 @@
                     <td>@inst.Gerencia</td>
                     <td>@inst.Materias</td>
                     <td>@inst.Actualizacion</td>
-                    <td>@inst.Calificacion2</td>
+                    <td>@inst.Calif2</td>
                     <td>
+                        <a asp-action="Editar" class="btn btn-secondary" asp-route-id="@inst.Expediente">Editar</a>
+                        <a asp-action="Borrar" class="btn btn-danger" asp-route-id="@inst.Expediente">Borrar</a>
                     </td>
                 </tr>
         }
         </tbody>
     </table>
-
 </div>
 
 

@@ -6,9 +6,12 @@ namespace SIGCIv2.Servicios
 {
     public interface IRepositorioInstructores
     {
+        Task Actualizar(Instructor instructor);
+        Task Borrar(Instructor instructor);
         Task Crear(Instructor instructor);
         Task<bool> NoExiste(int InstructorExp);
         Task<IEnumerable<Instructor>> Obtener();
+        Task<Instructor> ObtenerTipo(int Expediente);
     }
     public class RepositorioInstructores: IRepositorioInstructores
     {
@@ -24,11 +27,13 @@ namespace SIGCIv2.Servicios
             using var connection = new SqlConnection(connectionString);
             var id = await connection.QuerySingleAsync<int>($@"
                 INSERT INTO INSTRUCTORES (TrabajadorExp, CORREO, EXT, HORARIO, DESCANSO, Tel1, Tel2, CALIF, GERENCIA, MATERIAS, ACTUALIZACION, CALIF2)
-                VALUES (@InstructorExp, @Correo, @Extension, @Horario, @Descanso, @Telefono, @Telefono2, @Calificacion, @Gerencia, @Materias, @Actualizacion, @Calificacion2)
+                VALUES (@Expediente, @Correo, @Extension, @Horario, @Descanso, @Tel1, @Tel2, @Calif, @Gerencia, @Materias, @Actualizacion, @Calif2)
                 SELECT SCOPE_IDENTITY();", instructor);
 
             instructor.IdInstructor = id;
         }
+
+
 
         public async Task<bool> NoExiste(int InstructorExp)
         {
@@ -43,13 +48,35 @@ namespace SIGCIv2.Servicios
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryAsync<Instructor>(
                 @"SELECT IdInstructor,EXPEDIENTE, NOMBRE, CORREO, EXT, HORARIO, DESCANSO, Tel1, Tel2, CALIF, INSTRUCTORES.GERENCIA, MATERIAS, ACTUALIZACION, CALIF2  FROM INSTRUCTORES
-	INNER JOIN TRABAJADORES
-	ON TRABAJADORES.EXPEDIENTE = INSTRUCTORES.TrabajadorExp;");
+	            INNER JOIN TRABAJADORES
+	            ON TRABAJADORES.EXPEDIENTE = INSTRUCTORES.TrabajadorExp;");
                 //@"sp_CatalogoInstructores",
                 //commandType: System.Data.CommandType.StoredProcedure);
         }
 
+        public async Task Actualizar(Instructor instructor)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"UPDATE INSTRUCTORES SET
+                CORREO = @Correo, EXT = @Extension, HORARIO = @Horario, DESCANSO = @Descanso, Tel1 = @Tel1, Tel2 = @Tel2, CALIF = @CALIF, GERENCIA = @Gerencia,
+                MATERIAS = @Materias, ACTUALIZACION = @Actualizacion WHERE TrabajadorExp = @Expediente", instructor);
+        }
 
+        public async Task Borrar(Instructor instructor)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"DELETE FROM INSTRUCTORES WHERE TrabajadorExp = @Expediente;", instructor);
+        }
 
+        public async Task<Instructor> ObtenerTipo(int Expediente)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<Instructor>(
+                @"SELECT IdInstructor, EXPEDIENTE, NOMBRE, INSTRUCTORES.CORREO, EXT, HORARIO, DESCANSO, Tel1, Tel2, CALIF, INSTRUCTORES.GERENCIA, MATERIAS, ACTUALIZACION, CALIF2
+                FROM INSTRUCTORES  
+                INNER JOIN TRABAJADORES
+                ON TRABAJADORES.EXPEDIENTE = INSTRUCTORES.TrabajadorExp
+                WHERE EXPEDIENTE = @Expediente", new { Expediente });
+        }
     }
 }
