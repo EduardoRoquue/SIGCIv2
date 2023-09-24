@@ -9,7 +9,7 @@ namespace SIGCIv2.Servicios
         Task Actualizar(Instructor instructor);
         Task Borrar(Instructor instructor);
         Task Crear(Instructor instructor);
-        Task<bool> NoExiste(int InstructorExp);
+        Task<bool> NoExiste(int Expediente);
         Task<IEnumerable<Instructor>> Obtener();
         Task<Instructor> ObtenerTipo(int Expediente);
     }
@@ -33,13 +33,11 @@ namespace SIGCIv2.Servicios
             instructor.IdInstructor = id;
         }
 
-
-
-        public async Task<bool> NoExiste(int InstructorExp)
+        public async Task<bool> NoExiste(int Expediente)
         {
             using var connection = new SqlConnection(connectionString);
-            var existe = await connection.QueryFirstOrDefaultAsync<int>($"SELECT 1 FROM TRABAJADORES WHERE EXPEDIENTE = @InstructorExp;",
-                new {  InstructorExp });
+            var existe = await connection.QueryFirstOrDefaultAsync<int>($"SELECT 1 FROM TRABAJADORES WHERE EXPEDIENTE = @Expediente;",
+                new {  Expediente });
             return existe == 0;
         }
 
@@ -59,7 +57,7 @@ namespace SIGCIv2.Servicios
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync(@"UPDATE INSTRUCTORES SET
                 CORREO = @Correo, EXT = @Extension, HORARIO = @Horario, DESCANSO = @Descanso, Tel1 = @Tel1, Tel2 = @Tel2, CALIF = @CALIF, GERENCIA = @Gerencia,
-                MATERIAS = @Materias, ACTUALIZACION = @Actualizacion WHERE TrabajadorExp = @Expediente", instructor);
+                MATERIAS = @Materias, ACTUALIZACION = @Actualizacion, Calif2 = @Calif2 WHERE TrabajadorExp = @Expediente", instructor);
         }
 
         public async Task Borrar(Instructor instructor)
@@ -72,7 +70,7 @@ namespace SIGCIv2.Servicios
         {
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryFirstOrDefaultAsync<Instructor>(
-                @"SELECT IdInstructor, EXPEDIENTE, NOMBRE, INSTRUCTORES.CORREO, EXT, HORARIO, DESCANSO, Tel1, Tel2, CALIF, INSTRUCTORES.GERENCIA, MATERIAS, ACTUALIZACION, CALIF2
+                @"SELECT IdInstructor, EXPEDIENTE, NOMBRE, INSTRUCTORES.CORREO, INSTRUCTORES.EXT, HORARIO, DESCANSO, Tel1, Tel2, CALIF, INSTRUCTORES.GERENCIA, MATERIAS, ACTUALIZACION, CALIF2
                 FROM INSTRUCTORES  
                 INNER JOIN TRABAJADORES
                 ON TRABAJADORES.EXPEDIENTE = INSTRUCTORES.TrabajadorExp

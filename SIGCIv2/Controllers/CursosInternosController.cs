@@ -46,5 +46,52 @@ namespace SIGCIv2.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Editar(int IdInterno)
+        {
+            var existeCurso = await repositorioCursosInternos.ObtenerTipo(IdInterno);
+            if (existeCurso is null)
+            {
+                return RedirectToAction("Privacy", "Home");
+            }
+            return View(existeCurso);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Editar(CursosInternos cursosInternos)
+        {
+            var existeCurso = await repositorioCursosInternos.Existe(cursosInternos.Clave);
+            if (cursosInternos is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            await repositorioCursosInternos.Actualizar(cursosInternos);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Borrar(int id)
+        {
+            var cursosInternos = await repositorioCursosInternos.ObtenerTipo(id);
+            if (cursosInternos is null)
+            {
+                return RedirectToAction("Privacy", "Home");
+            }
+            return View(cursosInternos);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Borrar(CursosInternos cursosInternos)
+        {
+            var existeCurso = await repositorioCursosInternos.Existe(cursosInternos.Clave);
+            if (cursosInternos is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            await repositorioCursosInternos.Borrar(cursosInternos);
+            return RedirectToAction("Index");
+        }
+
     }
 }

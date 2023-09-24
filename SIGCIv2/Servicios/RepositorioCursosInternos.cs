@@ -7,9 +7,12 @@ namespace SIGCIv2.Servicios
 {
     public interface IRepositorioCursosInternos
     {
+        Task Actualizar(CursosInternos cursosInternos);
+        Task Borrar(CursosInternos cursosInternos);
         Task Crear(CursosInternos interno);
         Task<bool> Existe(string Nombre);
         Task<IEnumerable<CursosInternos>> Obtener();
+        Task<CursosInternos> ObtenerTipo(int IdInterno);
     }
     public class RepositorioCursosInternos: IRepositorioCursosInternos
     {
@@ -18,6 +21,13 @@ namespace SIGCIv2.Servicios
         public RepositorioCursosInternos(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
+        public async Task<IEnumerable<CursosInternos>> Obtener()
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryAsync<CursosInternos>(
+                @"SELECT IdInterno, NOMBRE, CLAVE, INICIO, TERMINO, TIPO, DIRIGIDO
+                    FROM CUR_INTERNOS");
         }
 
         public async Task Crear(CursosInternos cursosInternos)
@@ -30,6 +40,20 @@ namespace SIGCIv2.Servicios
             cursosInternos.IdInterno = id;
         }
 
+        public async Task Actualizar(CursosInternos cursosInternos)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync($@"UPDATE CUR_INTERNOS SET
+            NOMBRE = @Nombre, CLAVE = @Clave, INICIO = @Inicio, TERMINO = @Termino, TIPO = @Tipo, DIRIGIDO = @Dirigido
+            WHERE CLAVE = @Clave", cursosInternos);
+        }
+
+        public async Task Borrar(CursosInternos cursosInternos)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"DELETE FROM CUR_INTERNOS WHERE CLAVE = @Clave;", cursosInternos);
+        }
+
         public async Task<bool> Existe(string Clave)
         {
             using var connection = new SqlConnection(connectionString);
@@ -37,13 +61,13 @@ namespace SIGCIv2.Servicios
                    new { Clave });
             return existe == 1;
         }
-
-        public async Task<IEnumerable<CursosInternos>> Obtener()
+         
+        public async Task<CursosInternos> ObtenerTipo(int IdInterno)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<CursosInternos>(
-                @"SELECT IdInterno, NOMBRE, CLAVE, INICIO, TERMINO, TIPO, DIRIGIDO
-                    FROM CUR_INTERNOS");
+            return await connection.QueryFirstOrDefaultAsync<CursosInternos>(
+                 @"SELECT IdInterno, NOMBRE, CLAVE, INICIO, TERMINO, TIPO, DIRIGIDO
+                FROM CUR_INTERNOS WHERE IdInterno = @IdInterno", new { IdInterno });
         }
     }
 }

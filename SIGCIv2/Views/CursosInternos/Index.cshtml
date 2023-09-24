@@ -25,7 +25,7 @@
             @foreach (var inter in Model)
             {
                 <tr>
-                    <td>@inter.IdInterno.ToString()</td>
+                    <td>@inter.IdInterno</td>
                     <td>@inter.Nombre.ToUpper()</td>
                     <td>@inter.Clave.ToUpper()</td>
                     <td>@inter.Inicio.ToString("dd/MM/yyyy")</td>
@@ -33,7 +33,7 @@
                     <td>@inter.Tipo.ToUpper()</td>
                     <td>@inter.Dirigido.ToUpper()</td>
                     <td>
-                        <a asp-action="Editar" asp-route-id="@inter.Clave">Editar</a>
+                        <a asp-action="Editar" asp-route-id="@inter.IdInterno">Editar</a>
                     </td>
                 </tr>
             }

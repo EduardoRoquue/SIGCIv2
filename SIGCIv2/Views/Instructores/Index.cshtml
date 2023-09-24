@@ -11,7 +11,7 @@
     <table id="instructores" style="width:100%">
         <thead>
             <tr>
-                <th>ID</th>
+                @*<th>ID</th>*@
                 <th>EXPEDIENTE</th>
                 <th>NOMBRE</th>
                 <th>CORREO</th>
@@ -32,7 +32,7 @@
         @foreach (var inst in Model)
         {
                 <tr>
-                    <td>@inst.IdInstructor</td>
+                    @*<td>@inst.IdInstructor</td>*@
                     <td>@inst.Expediente</td>
                     <td>@inst.Nombre</td>
                     <td><a href="mailto:@inst.Correo">@inst.Correo</a></td>

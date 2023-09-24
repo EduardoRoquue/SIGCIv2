@@ -21,26 +21,34 @@ namespace SIGCIv2.Models
         [Required(ErrorMessage = "La extension es requerida")]
         [Display(Name = "Extensión")]
         [RegularExpression(@"[0-9]{4,4}", ErrorMessage = "Ingrese solo numeros y 4 caractéres")]
-        public string Extension { get; set; }
+        public int Extension { get; set; }
 
         [Required(ErrorMessage = "El horario es requerido")]
         [Display(Name = "Horario")]
         public string Horario { get; set; }
 
+        [Display(Name = "Descanso")]
         public string Descanso { get; set; }
 
+        [Display(Name = "Telefono Celular")]
         public string Tel1 { get; set; }
 
+        [Display(Name = "Telefono fijo")]
         public string Tel2 { get; set; }
 
+        [Display(Name = "Calificación")]
         public string CALIF { get; set; }
 
+        [Display(Name = "Gerencia/Unidad/Taller/Línea")]
         public string Gerencia { get; set; }
 
+        [Display(Name = "Materias a impartir")]
         public string Materias { get; set; }
 
+        [Display(Name = "Actualización")]
         public string Actualizacion { get; set; }
 
+        [Display(Name = "Calificación (ACT)")]
         public string Calif2 { get; set; }
     }
 }
